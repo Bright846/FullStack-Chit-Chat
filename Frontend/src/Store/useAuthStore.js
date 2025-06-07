@@ -17,8 +17,13 @@ export const useAuthStore = create((set, get) => ({
     checkAuth: async () => {
         try {
             const res = await axiosInstance.get('/api/check');
-            set({ authUser: res.data })
-            get().connectSocket();
+            // Only set if user object exists and has an _id
+            if (res.data && res.data._id) {
+                set({ authUser: res.data });
+                get().connectSocket();
+            } else {
+                set({ authUser: null });
+            }
         } catch (error) {
             console.log("Error in checking auth", error);
             set({ authUser: null });
@@ -26,6 +31,7 @@ export const useAuthStore = create((set, get) => ({
             set({ isCheckingAuth: false });
         }
     },
+
 
     signup: async (data) => {
         set({ isSignningUp: true })
