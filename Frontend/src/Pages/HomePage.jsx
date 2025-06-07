@@ -1,6 +1,6 @@
 import React from 'react';
 import { allUser } from '../Store/fetchAllUser';
-import SideBar from '../Components/sideBAr';
+import SideBar from '../Components/sideBar';
 import NoChatSelected from '../Components/noChatSelected';
 import ChatContainer from '../Components/chatContainer';
 
